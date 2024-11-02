@@ -75,20 +75,6 @@ typedef struct _PROCESS_MEMORY_COUNTERS
 //Defining one of these because we are going to point a DLL-function to it.
 typedef BOOL (WINAPI *GetProcessMemoryInfoFunc)(HANDLE, PROCESS_MEMORY_COUNTERS*, DWORD);
 
-
-//Generates the main number, which helps determine the construction of the final number.
-unsigned __int64 base();
-
-
-byte getRandom8(); //random 8-bit value.
-unsigned short getRandom16(); //random 16-bit value.
-unsigned long getRandom32(); //random 32-bit value.
-unsigned __int64 getRandom64(); //random 64-bit value.
-
-
-
-
-
 //This function develops a random-enough number from NOT time-based values, because time is reoccuring and doesn't change fast enough.
 //Here, we use your computer's process resources as the "seeds", which are perfect for this because they change fast enough and they differ system-to-system.
 //Now, we use seeds, but after we get a snapshot of the seeds, we modify the hell out of them and do a lot of stuff including prime numbers, addition, modulus
@@ -232,29 +218,6 @@ unsigned __int64 base()
 
 	//After all of that yahoo, we have our final, big number.
 	return final;
-}
-
-
-void AddToLog(unsigned __int64 nta)
-{
-	logged.push_back(nta);
-}
-
-bool AlreadyGenerated(unsigned __int64 num)
-{
-	bool bFound = false;
-
-	if (num != 0)
-	{
-		unsigned __int64* it = std::find(logged.begin(), logged.end(), num);
-		
-		if (it != logged.end())
-		{
-			bFound = true;
-		}
-	}
-
-	return bFound;
 }
 
 __int64 getRandom(byte bitAmount)
